@@ -11,6 +11,9 @@
 
 ## ベンチマーク条件
 
+- OS: Windows 11 Pro 26H1
+- CPU: AMD Ryzen 7 5700U with Radeon Graphics (1.80 GHz)
+- RAM: 32GB
 - 入力文字列: `2026-01-19`
 - 正規表現: `^\d{4}-\d{2}-\d{2}$`
 - 実行モード: Release
