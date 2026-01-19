@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>RegexBench-20260119-232937</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.28020.1371)
+AMD Ryzen 7 5700U with Radeon Graphics 1.80GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 10.0.102
+  [Host]     : .NET 8.0.23 (8.0.23, 8.0.2325.60607), X64 RyuJIT x86-64-v3
+  DefaultJob : .NET 8.0.23 (8.0.23, 8.0.2325.60607), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method       </th><th>Mean </th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>NewRegex</td><td>1,620.03 ns</td><td>38.724 ns</td><td>112.346 ns</td><td>1,587.23 ns</td><td>1.00</td><td>0.10</td><td>1.2131</td><td>2552 B</td><td>1.00</td>
+</tr><tr><td>StaticRegexMatch</td><td>89.65 ns</td><td>1.680 ns</td><td>2.899 ns</td><td>89.27 ns</td><td>0.06</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr><tr><td>CompiledRegexMatch</td><td>38.20 ns</td><td>0.795 ns</td><td>1.494 ns</td><td>37.68 ns</td><td>0.02</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr><tr><td>GeneratedRegexMatch</td><td>36.50 ns</td><td>0.546 ns</td><td>0.456 ns</td><td>36.59 ns</td><td>0.02</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr></tbody></table>
+</body>
+</html>
