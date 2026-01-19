@@ -39,6 +39,9 @@
 > ※ 可読性のため ns → µs 変換を行っています  
 > （例: 1445.96 ns ≒ 1.45 µs）
 
+<img width="567" height="455" alt="2026-01-20_00h04_19" src="https://github.com/user-attachments/assets/9829edb0-ce13-4873-ab77-0b77e7b5361a" />
+<img width="584" height="455" alt="2026-01-20_00h04_24" src="https://github.com/user-attachments/assets/8216e9e4-c39b-4e76-a4db-ef346eeef6c3" />
+
 使い方によっては**約60倍**の差が出る
 
 ---
