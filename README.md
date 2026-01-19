@@ -1,3 +1,5 @@
+[English](README.md) | [日本語](README.ja.md)
+
 # .NET Regex Performance Benchmark (NET 6 → 10)
 
 This repository contains **BenchmarkDotNet-based measurements** that visualize

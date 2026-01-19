@@ -1,3 +1,5 @@
+[English](README.md) | [日本語](README.ja.md)
+
 # .NET Regex パフォーマンスベンチマーク（.NET 6 → 10）
 
 このリポジトリでは、**BenchmarkDotNet による実測結果**をもとに、
