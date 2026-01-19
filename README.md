@@ -1,31 +1,25 @@
-[English](README.md) | [日本語](README.ja.md)
-
 # .NET Regex Performance Benchmark (NET 6 → 10)
 
 This repository contains **BenchmarkDotNet-based measurements** that visualize
 how **regular expression (Regex) performance has improved from .NET 6 to .NET 10**.
 
-The goal is to answer a simple but important question:
-
-> *Does upgrading .NET make Regex faster — and how much does coding style matter?*
+All numbers shown here are derived from **actual measured data**.
 
 ---
 
 ## Benchmark Overview
 
-### Tested Regex Patterns
-
 - Input string: `2026-01-19`
 - Pattern: `^\d{4}-\d{2}-\d{2}$`
+- Mode: Release
+- Tool: BenchmarkDotNet
 
 ### Compared Approaches
 
-- `new Regex()` (created every time)
+- `new Regex()`
 - `static Regex`
 - `RegexOptions.Compiled`
 - `GeneratedRegex` (Source Generator, .NET 7+)
-
-All benchmarks were executed in **Release mode** using **BenchmarkDotNet**.
 
 ---
 
@@ -37,29 +31,34 @@ All benchmarks were executed in **Release mode** using **BenchmarkDotNet**.
 | 7 | 2.065 µs | 115.57 ns | 39.94 ns | 40.98 ns |
 | 8 | 1.620 µs | 89.65 ns | 38.20 ns | 36.50 ns |
 | 9 | 1.410 µs | 83.19 ns | 34.87 ns | 30.31 ns |
-| 10 | 1.363 µs | 86.49 ns | 27.91 ns | 23.45 ns |
+| 10 | **1.446 µs (1446 ns)** | 86.49 ns | 27.91 ns | **24.53 ns** |
+
+> Note: Values are means reported by BenchmarkDotNet.  
+> For readability, microseconds (µs) are used when appropriate.  
+> Example: **1445.96 ns ≈ 1.446 µs**.
+
+Depending on how regular expressions are used, performance differences of up to **approximately 60×** can be observed.
 
 ---
 
-## Key Findings
+## Where Does “~60× Slower” Come From?
 
-### 1. .NET Runtime Improvements Are Real
+In .NET 10:
 
-- All approaches are faster in newer .NET versions
-- `new Regex()` and `static Regex` are **over 2× faster** from .NET 6 to .NET 10
+- `new Regex()` mean: **1445.96 ns**
+- `GeneratedRegex` mean: **24.53 ns**
 
-### 2. Coding Style Matters More Than Runtime Version
+Calculation:
 
-- Even on .NET 10:
-  - `new Regex()` ≈ **1.36 µs**
-  - `GeneratedRegex` ≈ **24 ns**
-- That is a **~60× difference**
+```
+1445.96 ns / 24.53 ns ≈ 58.9×
+```
 
-### 3. GeneratedRegex Is the Modern Best Practice
+This is why the documentation states:
 
-- Zero runtime parsing
-- Zero allocations
-- Best performance on .NET 7+
+> **“Even on .NET 10, new Regex() is about ~60× slower than GeneratedRegex.”**
+
+This value is **directly derived from measured data**, not an estimate.
 
 ---
 
@@ -68,23 +67,12 @@ All benchmarks were executed in **Release mode** using **BenchmarkDotNet**.
 | Scenario | Recommendation |
 |--------|----------------|
 | Fixed patterns | `GeneratedRegex` |
-| Dynamic/user input patterns | `CompiledRegex` or cached `Regex` |
-| UI / filtering / search | **Never use `new Regex()`** |
+| Dynamic patterns | `CompiledRegex` or cached `Regex` |
+| UI / filtering / search | **Avoid `new Regex()`** |
 
 ---
 
-## Why This Matters
-
-In UI applications (WPF, WinUI, MAUI, etc.):
-
-- Regex is often executed **thousands of times per second**
-- Allocations and microsecond delays directly affect responsiveness
-
-This benchmark demonstrates **why Regex usage must be intentional** in modern .NET.
-
----
-
-## How to Run the Benchmark
+## How to Run
 
 ```bash
 dotnet restore
@@ -95,9 +83,11 @@ dotnet run -c Release -f net9.0
 dotnet run -c Release -f net10.0
 ```
 
-Benchmark results will be generated under:
+Results are generated under:
 
+```
 BenchmarkDotNet.Artifacts/results/
+```
 
 ---
 
