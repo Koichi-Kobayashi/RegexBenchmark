@@ -11,6 +11,9 @@ All numbers shown here are derived from **actual measured data**.
 
 ## Benchmark Overview
 
+- OS: Windows 11 Pro 26H1
+- CPU: AMD Ryzen 7 5700U with Radeon Graphics (1.80 GHz)
+- RAM: 32GB
 - Input string: `2026-01-19`
 - Pattern: `^\d{4}-\d{2}-\d{2}$`
 - Mode: Release
